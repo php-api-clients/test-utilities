@@ -1,28 +1,19 @@
+sudo: false
 language: php
-
-## Cache composer bits
-cache:
-  directories:
-    - $HOME/.composer/cache/files
 
 ## Build matrix for lowest and highest possible targets
 matrix:
   include:
     - php: nightly
-      env:
-        - dependencies=highest
-        - dropPlatform=false
 
 ## Install or update dependencies
 install:
   - composer validate
-  - if [ "$dependencies" = "highest" ]; then composer why-not phpunit/phpunit; fi;
+  - composer install
+  - composer why-not phpunit/phpunit
   - composer show
 
 ## Run the actual test
 script:
   - if [ -z "$qaExtended" ]; then make ci; fi;
   - if [ "$qaExtended" = "true" ]; then make ci-extended; fi;
-
-## Gather coverage and set it to coverage servers
-after_script: if [ "$qaExtended" = "true" ]; then make ci-coverage; fi;
