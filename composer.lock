@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b74b703c58dede71b1bbe4326ba8025a",
+    "content-hash": "0bf2c52fff55273e4250238827b96849",
     "packages": [
         {
             "name": "api-clients/cs-fixer-config",
@@ -535,16 +535,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.9.3",
+            "version": "0.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "98de6f13821c88dd671257d27cc7dcbca0409d2d"
+                "reference": "141db947c5d9bc6f9d02e4c65b40b1607d4949e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/98de6f13821c88dd671257d27cc7dcbca0409d2d",
-                "reference": "98de6f13821c88dd671257d27cc7dcbca0409d2d",
+                "url": "https://api.github.com/repos/infection/infection/zipball/141db947c5d9bc6f9d02e4c65b40b1607d4949e6",
+                "reference": "141db947c5d9bc6f9d02e4c65b40b1607d4949e6",
                 "shasum": ""
             },
             "require": {
@@ -553,14 +553,15 @@
                 "nikic/php-parser": "^4.0",
                 "ocramius/package-versions": "^1.2",
                 "padraic/phar-updater": "^1.0.4",
-                "php": "^7.0",
+                "php": "^7.1",
                 "pimple/pimple": "^3.2",
                 "sebastian/diff": "^1.4 || ^2.0 || ^3.0",
                 "symfony/console": "^3.2 || ^4.0",
                 "symfony/filesystem": "^3.2 || ^4.0",
                 "symfony/finder": "^3.2 || ^4.0",
                 "symfony/process": "^3.2 || ^4.0",
-                "symfony/yaml": "^3.2 || ^4.0"
+                "symfony/yaml": "^3.2 || ^4.0",
+                "webmozart/assert": "^1.3"
             },
             "conflict": {
                 "symfony/process": "3.4.2"
@@ -616,7 +617,7 @@
                 "testing",
                 "unit testing"
             ],
-            "time": "2018-08-09T04:45:18+00:00"
+            "time": "2018-08-30T05:03:47+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
