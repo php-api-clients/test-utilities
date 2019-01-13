@@ -20,7 +20,9 @@
     "localheinz/composer-normalize": "^1.0.0",
     "nunomaduro/collision": "^2.1",
     "phpstan/phpstan": "^0.10.7",
-    "phpunit/phpunit": "^7.5"
+    "phpunit/phpunit": "^7.5",
+    "wyrihaximus/async-test-utilities": "dev-master",
+    "wyrihaximus/test-utilities": "dev-master"
   },
   "require-dev": {},
   "config": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ad8b197d51684d7768b9cf50eec0040",
+    "content-hash": "6ac87982156ac59fde142fcb7a5f21f2",
     "packages": [
         {
             "name": "api-clients/cs-fixer-config",
@@ -4750,12 +4750,100 @@
                 "validate"
             ],
             "time": "2018-12-25T11:19:39+00:00"
+        },
+        {
+            "name": "wyrihaximus/async-test-utilities",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/php-async-test-utilities.git",
+                "reference": "e170d3270f1463325010440c5c5920bf498752f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/php-async-test-utilities/zipball/e170d3270f1463325010440c5c5920bf498752f9",
+                "reference": "e170d3270f1463325010440c5c5920bf498752f9",
+                "shasum": ""
+            },
+            "require": {
+                "api-clients/cs-fixer-config": "^1.1.1",
+                "clue/block-react": "^1.3",
+                "php": "^7.2",
+                "wyrihaximus/test-utilities": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WyriHaximus\\AsyncTestUtilities\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                }
+            ],
+            "description": "Test utilities for api-clients packages",
+            "time": "2019-01-13T21:23:17+00:00"
+        },
+        {
+            "name": "wyrihaximus/test-utilities",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/php-test-utilities.git",
+                "reference": "ba9dfba85c494e1fa1b58d56ea8fa0beb292a4eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/php-test-utilities/zipball/ba9dfba85c494e1fa1b58d56ea8fa0beb292a4eb",
+                "reference": "ba9dfba85c494e1fa1b58d56ea8fa0beb292a4eb",
+                "shasum": ""
+            },
+            "require": {
+                "api-clients/cs-fixer-config": "^1.1.1",
+                "composer/composer": "^1.8",
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "infection/infection": "^0.11.4",
+                "jakub-onderka/php-console-highlighter": "^0.4",
+                "jakub-onderka/php-parallel-lint": "^1.0.0",
+                "localheinz/composer-normalize": "^1.0.0",
+                "nunomaduro/collision": "^2.1",
+                "php": "^7.2",
+                "phpstan/phpstan": "^0.10.7",
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WyriHaximus\\TestUtilities\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                }
+            ],
+            "description": "Test utilities for api-clients packages",
+            "time": "2019-01-13T21:03:33+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "wyrihaximus/async-test-utilities": 20,
+        "wyrihaximus/test-utilities": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
