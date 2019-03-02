@@ -11,6 +11,7 @@
   "require": {
     "php": "^7.0",
     "clue/block-react": "^1.1",
+    "composer/composer": "^1.8",
     "friendsofphp/php-cs-fixer": "^2.5",
     "infection/infection": "^0.6.2",
     "jakub-onderka/php-console-highlighter": "^0.3.2",
