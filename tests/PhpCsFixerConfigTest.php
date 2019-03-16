@@ -4,12 +4,13 @@ namespace ApiClients\Tests\Tools\TestUtilities;
 
 use ApiClients\Tools\TestUtilities\PhpCsFixerConfig;
 use ApiClients\Tools\TestUtilities\TestCase;
-use PhpCsFixer\Config;
 
 final class PhpCsFixerConfigTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
-        self::assertInstanceOf(Config::class, PhpCsFixerConfig::create());
+        $ruleName = 'extra_rule_iwufhkyqwehifgyuqewf';
+        $config = PhpCsFixerConfig::create([$ruleName => true]);
+        self::assertTrue(isset($config->getRules()[$ruleName]));
     }
 }
