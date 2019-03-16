@@ -1,0 +1,9 @@
+parameters:
+	ignoreErrors:
+		- '#Call to deprecated method create\(\) of class ApiClients\\Tools\\TestUtilities\\PhpCsFixerConfig.#'
+		- '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+\(\) has parameter \$loop with a nullable type declaration.#'
+	classesAllowedToBeExtended:
+		- ApiClients\Tools\TestUtilities\TestCase
+
+includes:
+	- vendor/wyrihaximus/async-test-utilities/rules.neon

@@ -7,30 +7,19 @@ use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\StreamSelectLoop;
 use React\Promise\Deferred;
-use function React\Promise\resolve;
-use function React\Promise\Timer\timeout;
 use React\Promise\Timer\TimeoutException;
+use function React\Promise\resolve;
 
 final class TestCaseTest extends TestCase
 {
-    const PENTIUM = 66;
+    private const PENTIUM = 66;
 
     /**
      * @var string
      */
     private $previousTemporaryDirectory = '';
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
-    public function provideTemporaryDirectory()
+    public function provideTemporaryDirectory(): iterable
     {
         for ($i = 0; $i <= self::PENTIUM; $i++) {
             yield [
@@ -39,14 +28,14 @@ final class TestCaseTest extends TestCase
         }
     }
 
-    public function provideEventLoop()
+    public function provideEventLoop(): iterable
     {
         yield [null];
         yield [Factory::create()];
         yield [new StreamSelectLoop()];
     }
 
-    public function testRecursiveDirectoryCreation()
+    public function testRecursiveDirectoryCreation(): void
     {
         static::assertFileExists($this->getTmpDir());
     }
@@ -54,7 +43,7 @@ final class TestCaseTest extends TestCase
     /**
      * @dataProvider provideTemporaryDirectory
      */
-    public function testTemporaryDirectoryAndGetFilesInDirectory(string $int)
+    public function testTemporaryDirectoryAndGetFilesInDirectory(string $int): void
     {
         static::assertNotSame($this->getTmpDir(), $this->previousTemporaryDirectory);
 
@@ -75,8 +64,9 @@ final class TestCaseTest extends TestCase
 
     /**
      * @dataProvider provideEventLoop
+     * @param LoopInterface|null $loop
      */
-    public function testAwait(LoopInterface $loop = null)
+    public function testAwait(?LoopInterface $loop): void
     {
         $value = time();
         static::assertSame($value, $this->await(resolve($value), $loop));
@@ -84,8 +74,9 @@ final class TestCaseTest extends TestCase
 
     /**
      * @dataProvider provideEventLoop
+     * @param LoopInterface|null $loop
      */
-    public function testAwaitAll(LoopInterface $loop = null)
+    public function testAwaitAll(?LoopInterface $loop): void
     {
         $value = time();
         static::assertSame([$value, $value], $this->awaitAll([resolve($value), resolve($value)], $loop));
@@ -93,8 +84,9 @@ final class TestCaseTest extends TestCase
 
     /**
      * @dataProvider provideEventLoop
+     * @param LoopInterface|null $loop
      */
-    public function testAwaitAny(LoopInterface $loop = null)
+    public function testAwaitAny(?LoopInterface $loop): void
     {
         $value = time();
         static::assertSame($value, $this->awaitAny([resolve($value), resolve($value)], $loop));
@@ -102,23 +94,24 @@ final class TestCaseTest extends TestCase
 
     /**
      * @dataProvider provideTrueFalse
+     * @param mixed $bool
      */
-    public function testTrueFalse(bool $bool)
+    public function testTrueFalse($bool): void
     {
-        static::assertInternalType('bool', $bool);
+        static::assertIsBool($bool);
     }
 
     /**
      * @dataProvider provideEventLoop
      */
-    public function testAwaitTimeout(LoopInterface $loop = null)
+    public function testAwaitTimeout(?LoopInterface $loop): void
     {
         self::expectException(TimeoutException::class);
 
         $this->await((new Deferred())->promise(), $loop, 0.1);
     }
 
-    public function testGetSysTempDir()
+    public function testGetSysTempDir(): void
     {
         self::assertFileExists($this->getSysTempDir());
     }
