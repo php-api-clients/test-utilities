@@ -1,6 +1,7 @@
 parameters:
-	classesAllowedToBeExtended:
-		- ApiClients\Tools\TestUtilities\TestCase
+	ergebnis:
+		classesAllowedToBeExtended:
+		    - ApiClients\Tools\TestUtilities\TestCase
 
 includes:
 	- ../../wyrihaximus/async-test-utilities/rules.neon
