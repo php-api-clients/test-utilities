@@ -1,24 +1,32 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ApiClients\Tests\Tools\TestUtilities;
 
 use ApiClients\Tools\TestUtilities\TestCase;
-use React\EventLoop\Factory;
-use React\EventLoop\LoopInterface;
-use React\EventLoop\StreamSelectLoop;
 use React\Promise\Deferred;
 use React\Promise\Timer\TimeoutException;
+
+use function random_int;
 use function React\Promise\resolve;
+use function Safe\file_get_contents;
+use function Safe\file_put_contents;
+use function Safe\mkdir;
+use function time;
+
+use const DIRECTORY_SEPARATOR;
+use const PHP_INT_MAX;
 
 final class TestCaseTest extends TestCase
 {
     private const PENTIUM = 66;
 
-    /**
-     * @var string
-     */
-    private $previousTemporaryDirectory = '';
+    private string $previousTemporaryDirectory = '';
 
+    /**
+     * @return iterable<array<string>>
+     */
     public function provideTemporaryDirectory(): iterable
     {
         for ($i = 0; $i <= self::PENTIUM; $i++) {
@@ -26,13 +34,6 @@ final class TestCaseTest extends TestCase
                 (string) random_int($i * $i, PHP_INT_MAX),
             ];
         }
-    }
-
-    public function provideEventLoop(): iterable
-    {
-        yield [null];
-        yield [Factory::create()];
-        yield [new StreamSelectLoop()];
     }
 
     public function testRecursiveDirectoryCreation(): void
@@ -51,7 +52,7 @@ final class TestCaseTest extends TestCase
         mkdir($dir);
 
         for ($i = 0; $i < self::PENTIUM; $i++) {
-            static::assertCount($i, $this->getFilesInDirectory($this->getTmpDir()), (string)$i);
+            static::assertCount($i, $this->getFilesInDirectory($this->getTmpDir()), (string) $i);
             file_put_contents($dir . $i, $int);
         }
 
@@ -62,53 +63,39 @@ final class TestCaseTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider provideEventLoop
-     * @param LoopInterface|null $loop
-     */
-    public function testAwait(?LoopInterface $loop): void
+    public function testAwait(): void
     {
         $value = time();
-        static::assertSame($value, $this->await(resolve($value), $loop));
+        static::assertSame($value, $this->await(resolve($value)));
+    }
+
+    public function testAwaitAll(): void
+    {
+        $value = time();
+        static::assertSame([$value, $value], $this->awaitAll([resolve($value), resolve($value)]));
+    }
+
+    public function testAwaitAny(): void
+    {
+        $value = time();
+        static::assertSame($value, $this->awaitAny([resolve($value), resolve($value)]));
     }
 
     /**
-     * @dataProvider provideEventLoop
-     * @param LoopInterface|null $loop
-     */
-    public function testAwaitAll(?LoopInterface $loop): void
-    {
-        $value = time();
-        static::assertSame([$value, $value], $this->awaitAll([resolve($value), resolve($value)], $loop));
-    }
-
-    /**
-     * @dataProvider provideEventLoop
-     * @param LoopInterface|null $loop
-     */
-    public function testAwaitAny(?LoopInterface $loop): void
-    {
-        $value = time();
-        static::assertSame($value, $this->awaitAny([resolve($value), resolve($value)], $loop));
-    }
-
-    /**
-     * @dataProvider provideTrueFalse
      * @param mixed $bool
+     *
+     * @dataProvider provideTrueFalse
      */
     public function testTrueFalse($bool): void
     {
         static::assertIsBool($bool);
     }
 
-    /**
-     * @dataProvider provideEventLoop
-     */
-    public function testAwaitTimeout(?LoopInterface $loop): void
+    public function testAwaitTimeout(): void
     {
         self::expectException(TimeoutException::class);
 
-        $this->await((new Deferred())->promise(), $loop, 0.1);
+        $this->await((new Deferred())->promise(), 0.1);
     }
 
     public function testGetSysTempDir(): void

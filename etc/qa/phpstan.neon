@@ -4,4 +4,4 @@ parameters:
 		    - ApiClients\Tools\TestUtilities\TestCase
 
 includes:
-	- vendor/wyrihaximus/async-test-utilities/rules.neon
+	- ../../vendor/wyrihaximus/async-test-utilities/rules.neon
